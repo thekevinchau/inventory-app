@@ -1,0 +1,68 @@
+*{
+    margin: 0;
+    font-family: Arial;
+}
+
+body{
+    background-color: #282827;
+    height: 100vh;
+}
+
+.header{
+    color: white;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-bottom: 1px solid;
+    height: 15vh; 
+}
+
+a{
+    color: red;
+}
+
+.listings {
+    background-color: #181818;
+    height: 75vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-left: 1rem;
+}
+
+.add-delete{
+    width: 98vw;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.movie-card {
+    color: white;
+    background-color: #282827;
+    height: 70vh;
+    width: 18vw;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.movie-image{
+    margin-top: 2vh;
+    height: 25rem;
+    width: 17rem;
+    border: 1px solid white;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+}
+
+.movie-details{
+    width: 16rem;
+    height: 10rem;
+}
+
+.movie-details > p {
+    margin-bottom: 0.5rem;
+}
