@@ -16,7 +16,9 @@
     </div>
 
     <div class="listings">
-        <%- include('movieCard') %>
+        <% movies.forEach(movie => { %>
+            <%- include('movieCard', {movie: movie}) %>
+        <% }) %>>
     </div>
 
 </body>
