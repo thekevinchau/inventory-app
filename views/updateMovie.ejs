@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Updating movie</title>
+    <link rel="stylesheet" href="/addMovie.css">
+</head>
+<body>
+    <h1>Update movie!</h1>
+    <div>
+        <form action="/create" method="POST" class="movie-form">
+            <label>Movie Title:</label>
+            <input name="movie_title" required>
+            <label>Director:</label>
+            <input name="movie_director" required>
+            <label>Genre:</label>
+            <input name="movie_genre" required>
+            <label>Cast (separated by commas):</label>
+            <input name="movie_main_actor" required>
+            <label>Year:</label>
+            <input name="movie_released" required>
+
+            <div style="display: flex; justify-content: center; margin-top: 1rem; align-items: center;">
+                <button type="submit" id="submitButton">Update</button>
+                <a href="/">Return home</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

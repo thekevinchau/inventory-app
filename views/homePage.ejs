@@ -12,7 +12,7 @@
         <a href="/search">Search</a>
         <h1> Movie Gallery </h1>
         <a href="/create">Add a movie</a>
-        <a href="/deleteAll">Delete all</a>
+        <a href="/deleteAll" id="deleteAll">Delete all</a>
     </div>
 
     <div class="listings">
@@ -20,6 +20,14 @@
             <%- include('movieCard', {movie: movie}) %>
         <% }) %>>
     </div>
+
+    <script>
+        const deleteAll = document.querySelector('#deleteAll');
+
+        deleteAll.addEventListener('click', () => {
+            prompt('What is the secret password?')
+        })
+    </script>
 
 </body>
 </html>

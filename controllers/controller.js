@@ -5,6 +5,13 @@ exports.renderHomePage = async (req, res) => {
     res.render('homePage', {title: 'Homepage', movies: allMovies})
 }
 
+exports.renderSearchPage = (req, res) => {
+    res.render('searchMovie')
+}
+exports.renderUpdatePage = (req, res) => {
+    res.render('updateMovie')
+}
+
 exports.submitMovie = async (req, res) => {
     const {movie_title, movie_director, movie_genre, movie_main_actor, movie_released} = req.body;
     const movieObj = {movie_title: movie_title, movie_director: movie_director, movie_genre: movie_genre, movie_main_actor: movie_main_actor, movie_released: movie_released};
@@ -15,7 +22,7 @@ exports.submitMovie = async (req, res) => {
 
 exports.deleteAll = (req, res) => {
     db.dropAllEntries();
-    res.send('All movies have been deleted!');
+    res.redirect('/')
 }
 
 exports.renderAddPage = (req, res) => {
