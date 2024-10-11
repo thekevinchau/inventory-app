@@ -5,7 +5,6 @@ let movie_poster = 1;
 async function retrieveAllMovies() {
     try {
         const { rows } = await db.query('SELECT * FROM movies')
-        console.log(rows);
         return rows;
     }
     catch (err) {
@@ -26,8 +25,8 @@ async function insertMovie(movieObject) {
     catch (err) {
         console.error('Error inserting movie into the database', err)
     }
-}
 
+}
 async function dropAllEntries() {
     try {
         await db.query('DELETE FROM movies;')

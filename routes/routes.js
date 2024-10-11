@@ -10,4 +10,5 @@ router.get('/search', controller.renderSearchPage)
 router.get('/update', controller.renderUpdatePage)
 
 router.post('/create', controller.submitMovie);
+router.post('/update',controller.editMovie);
 module.exports = router;
