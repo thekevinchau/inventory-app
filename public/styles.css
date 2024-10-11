@@ -23,11 +23,17 @@ a{
 
 .listings {
     background-color: #181818;
-    height: 80vh;
+    height: auto; /* Allows height to expand with content */
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+    flex-wrap: wrap; /* Allows items to wrap to a new row */
+    justify-content: flex-start; /* Aligns items to the start of each row */
     padding-left: 1rem;
+}
+
+.listings > div { /* Adjust the selector based on your actual HTML structure */
+    margin: 10px; /* Adjust the value as needed for spacing */
+    /* Optionally, add some width to each item */
+    width: calc(25% - 20px); /* Example: 4 items per row with spacing */
 }
 
 .add-delete{
@@ -47,6 +53,8 @@ a{
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 3rem;
+    margin-bottom: 2.5rem;
 }
 
 .movie-image{
