@@ -7,6 +7,9 @@ How it works:
     - takes the nonempty key-value pairs of everything in the updated_params mapping and pushes their string value into an array
         -example: {movie_title : 'abcd', movie_genre: 'Action', movie_released: '2003'} -> ["movie_title = 'abcd'"", "movie_genre = 'Action'"", "movie_released = '2003'"]
         - it takes every string in the updates array, and puts the SET keyword and joins it with a comma
+            -example: ["movie_title = 'abcd'"", "movie_genre = 'Action'"", "movie_released = '2003'"]
+                -> SET + "movie_title = 'abcd', movie_genre = 'Action', movie_released='2003'";
+                - overall string: "SET movie_title = 'abcd', movie_genre = 'Action', movie_released='2003'"
 
 */
 function processUpdateQuery(updated_params){
@@ -62,6 +65,17 @@ async function updateMovie(movie_id, updated_params){
     }
 }
 
+async function deleteMovie(movie_id){
+    try{
+        await db.query(`
+            DELETE FROM movies WHERE movie_id = ${movie_id};
+            `)
+    }
+    catch(err){
+        console.error(`Error deleting movie ${movie_id}`, err)
+    }
+}
+
 
 async function dropAllEntries() {
     try {
@@ -74,4 +88,4 @@ async function dropAllEntries() {
     }
 }
 
-module.exports = { retrieveAllMovies, insertMovie, dropAllEntries, processUpdateQuery, updateMovie }
+module.exports = { retrieveAllMovies, insertMovie, dropAllEntries, updateMovie, deleteMovie }
