@@ -10,11 +10,11 @@ CREATE TABLE IF NOT EXISTS movies (
     movie_title VARCHAR(50) NOT NULL,
     movie_director VARCHAR(50) NOT NULL,
     movie_genre VARCHAR(20) NOT NULL,
-    movie_cast VARCHAR(50) NOT NULL,
+    movie_main_actor VARCHAR(50) NOT NULL,
     movie_released int NOT NULL
 );
 
-INSERT INTO movies (movie_poster, movie_title, movie_director, movie_genre, movie_cast, movie_released)
+INSERT INTO movies (movie_poster, movie_title, movie_director, movie_genre, movie_main_actor, movie_released)
 VALUES
 ('poster1', 'Oppenheimer', 'Christopher Nolan', 'Drama', 'Cilian Murphy', 2023),
 ('poster2', 'The Dark Knight', 'Christopher Nolan', 'Action', 'Christian Bale', 2008),
