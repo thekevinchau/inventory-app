@@ -25,7 +25,7 @@ exports.submitMovie = async (req, res) => {
 
 }
 
-exports.editMovie = (req, res) => {
+exports.editMovie = async (req, res) => {
     const movie_id = req.query.movie_id;
     const isEmptyUpdate = Object.values(req.body).every(elem => elem === '')
     if (isEmptyUpdate){
@@ -33,9 +33,15 @@ exports.editMovie = (req, res) => {
     }
     else{
         const update_params = {...req.body};
-        db.updateMovie(movie_id, update_params);
+        await db.updateMovie(movie_id, update_params);
     }
     res.redirect('/');
+}
+
+exports.removeMovie = async(req, res) => {
+    const {movie_id} = req.query;
+    await db.deleteMovie(movie_id);
+    res.redirect('/')
 }
 
 exports.deleteAll = (req, res) => {
