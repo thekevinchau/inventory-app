@@ -2,18 +2,18 @@ const db = require("../db/query");
 
 exports.renderHomePage = async (req, res) => {
     const allMovies = await db.retrieveAllMovies();
-    res.render('homePage', {title: 'Homepage', movies: allMovies})
+    res.status(200).render('homePage', {title: 'Homepage', movies: allMovies})
 }
 
 exports.renderSearchPage = (req, res) => {
-    res.render('searchMovie')
+    res.status(200).render('searchMovie')
 }
 exports.renderUpdatePage = (req, res) => {
-    res.render('updateMovie', {movie_id: req.query.movie_id})
+    res.status(200).render('updateMovie', {movie_id: req.query.movie_id})
 }
 
 exports.renderAddPage = (req, res) => {
-    res.render('addMovie');
+    res.status(200).render('addMovie');
 }
 
 
@@ -33,8 +33,7 @@ exports.editMovie = (req, res) => {
     }
     else{
         const update_params = {...req.body};
-        console.log(Object.values(req.body))
-        console.log(update_params);
+        db.updateMovie(movie_id, update_params);
     }
     res.redirect('/');
 }
