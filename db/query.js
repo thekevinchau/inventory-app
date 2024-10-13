@@ -31,9 +31,10 @@ async function insertMovie(movieObject) {
 }
 
 async function updateMovie(movie_id, updated_params){
-    const updateQuery = processUpdateQuery(updated_params);
-    console.log(updateQuery);
     try{
+        const updateQuery = await processUpdateQuery(updated_params);
+        console.log(updateQuery);
+
         await db.query(`
             UPDATE movies
             ${updateQuery}
