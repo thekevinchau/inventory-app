@@ -3,7 +3,7 @@ require('dotenv').config({path: path.resolve(__dirname, '../.env')})
 
 const TMDB_API_TOKEN = process.env.TMDB_API_TOKEN;
 
-const retriveMovieImage = async(movie_title) => {
+const retrieveMovieImage = async(movie_title) => {
   const url = `https://api.themoviedb.org/3/search/movie?query=${movie_title}&include_adult=false&language=en-US&page=1`;
   const options = {
     method: 'GET',
@@ -16,11 +16,14 @@ const retriveMovieImage = async(movie_title) => {
   try{
     const query = await fetch(url, options);
     const response = await query.json();
-    console.log(response.results[0].poster_path);
+    const image_path = response.results[0].poster_path;
+    console.log(image_path);
+    return `https://image.tmdb.org/t/p/w500${image_path}`
   }
   catch(err){
     console.log('Error fetching movie image', err);
   }
 }
 
-module.exports = retriveMovieImage;
+
+module.exports = retrieveMovieImage;

@@ -66,6 +66,13 @@ a{
     margin-bottom: 1.5rem;
 }
 
+.movie-image > img{
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    border-radius: 1rem;
+}
+
 .movie-details{
     width: 18rem;
     height: 10rem;

@@ -1,7 +1,7 @@
 const db = require('./pool.js')
-const {processUpdateQuery, processSearchQuery} = require('../utils/queryProcessing.js')
+const {processUpdateQuery, processSearchQuery} = require('../utils/queryProcessing.js');
+const retrieveMovieImage = require('../utils/testingFetch.js');
 
-let movie_poster = 1;
 
 async function retrieveAllMovies() {
     try {
@@ -17,11 +17,11 @@ async function insertMovie(movieObject) {
     const { movie_title, movie_director, movie_genre, movie_main_actor, movie_released } = movieObject;
 
     try {
+        const poster_url = await retrieveMovieImage(movie_title);
         await db.query(`
             INSERT INTO movies (movie_poster, movie_title, movie_director, movie_genre, movie_main_actor, movie_released)
-            VALUES ('${movie_poster}', '${movie_title}', '${movie_director}', '${movie_genre}','${movie_main_actor}', ${movie_released});
+            VALUES ('${poster_url}', '${movie_title}', '${movie_director}', '${movie_genre}','${movie_main_actor}', ${movie_released});
             `);
-        movie_poster++;
     }
     catch (err) {
         console.error('Error inserting movie into the database', err)
