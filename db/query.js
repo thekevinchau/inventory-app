@@ -5,12 +5,11 @@ let movie_poster = 1;
 
 async function retrieveAllMovies() {
     try {
-        const { rows } = await db.query('SELECT * FROM movies')
+        const { rows } = await db.query('SELECT * FROM movies ORDER BY movie_title;')
         return rows;
     }
     catch (err) {
         console.error('Error retrieving all users from database', err);
-        res.status(500).send('Server error');
     }
 }
 
