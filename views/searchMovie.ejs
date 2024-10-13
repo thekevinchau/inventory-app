@@ -9,17 +9,17 @@
 <body>
     <h1>Search for a movie!</h1>
     <div>
-        <form action="/create" method="POST" class="movie-form">
+        <form action="/search" method="POST" class="movie-form">
             <label>Movie Title:</label>
-            <input name="movie_title" required>
+            <input name="movie_title">
             <label>Director:</label>
-            <input name="movie_director" required>
+            <input name="movie_director">
             <label>Genre:</label>
-            <input name="movie_genre" required>
+            <input name="movie_genre">
             <label>Cast (separated by commas):</label>
-            <input name="movie_main_actor" required>
+            <input name="movie_main_actor">
             <label>Year:</label>
-            <input name="movie_released" required>
+            <input name="movie_released" type="number">
 
             <div style="display: flex; justify-content: center; margin-top: 1rem; align-items: center;">
                 <button type="submit" id="submitButton">Search</button>

@@ -44,7 +44,19 @@ exports.removeMovie = async(req, res) => {
     res.redirect('/')
 }
 
-exports.deleteAll = (req, res) => {
-    db.dropAllEntries();
+exports.searchMovie = async(req, res) => {
+
+    try{
+        const search = await db.searchMovie(req.body);
+        res.render('homePage', {movies: search, title: 'Search results'});
+    }
+    catch(err){
+        console.error('Error searching for the movie');
+        res.status(400).send('Movie not found!')
+    }
+}
+
+exports.deleteAll = async(req, res) => {
+    await db.dropAllEntries();
     res.redirect('/')
 }
