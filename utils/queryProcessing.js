@@ -6,11 +6,19 @@ How it works:
             -example: ["movie_title = 'abcd'"", "movie_genre = 'Action'"", "movie_released = '2003'"]
                 -> SET + "movie_title = 'abcd', movie_genre = 'Action', movie_released='2003'";
                 - overall string: "SET movie_title = 'abcd', movie_genre = 'Action', movie_released='2003'"
+    - now I've implemented image functionality.
+        - implementation: we have the movie_title from updated_params
+            - we call on retrieveMovieImage from 'testingFetch.js' to return us the url for the image. then we can immediately push the key value pair via a
+            'movie_poster = url' SQL query.
 
 */
 
-function processUpdateQuery(updated_params){
+const retrieveMovieImage = require("./testingFetch");
+
+async function processUpdateQuery(updated_params){
     const updates = [];
+    const poster_url = await retrieveMovieImage(updated_params.movie_title);
+    updates.push(`movie_poster = '${poster_url}'`);
     for (const [key,value] of Object.entries(updated_params)){
         if (value !== ''){
             updates.push(`${key} = '${value}'`);
