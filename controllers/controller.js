@@ -20,7 +20,16 @@ exports.renderAddPage = (req, res) => {
 exports.submitMovie = async (req, res) => {
     const {movie_title, movie_director, movie_genre, movie_main_actor, movie_released} = req.body;
     const movieObj = {movie_title: movie_title, movie_director: movie_director, movie_genre: movie_genre, movie_main_actor: movie_main_actor, movie_released: movie_released};
-    await db.insertMovie(movieObj);
+
+    try{
+        await db.insertMovie(movieObj);
+    }
+    catch(err){
+        console.error('Error inserting movie', err);
+        res.status(500).send('Server error when inserting movie')
+    }
+
+
     res.redirect('/');
 
 }
@@ -32,8 +41,16 @@ exports.editMovie = async (req, res) => {
         return res.status(400).send('Request body is empty!');
     }
     else{
-        const update_params = {...req.body};
-        await db.updateMovie(movie_id, update_params);
+
+        try{
+            const update_params = {...req.body};
+            await db.updateMovie(movie_id, update_params);
+        }
+        catch(err){
+            console.error('Error updating movie', err);
+            res.status(500).send('Server error when updating movie!');
+        }
+
     }
     res.redirect('/');
 }
@@ -52,7 +69,7 @@ exports.searchMovie = async(req, res) => {
     }
     catch(err){
         console.error('Error searching for the movie');
-        res.status(400).send('Movie not found!')
+        res.status(404).send('Movie not found!')
     }
 }
 

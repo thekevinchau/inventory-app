@@ -16,9 +16,9 @@ CREATE TABLE IF NOT EXISTS movies (
 
 INSERT INTO movies (movie_poster, movie_title, movie_director, movie_genre, movie_main_actor, movie_released)
 VALUES
-('poster1', 'Oppenheimer', 'Christopher Nolan', 'Drama', 'Cilian Murphy', 2023),
-('poster2', 'The Dark Knight', 'Christopher Nolan', 'Action', 'Christian Bale', 2008),
-('poster3', 'The Dark Knight Rises', 'Christopher Nolan', 'Action', 'Christian Bale', 2012);
+('https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg', 'Oppenheimer', 'Christopher Nolan', 'Drama', 'Cilian Murphy', 2023),
+('https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg', 'The Dark Knight', 'Christopher Nolan', 'Action', 'Christian Bale', 2008),
+('https://image.tmdb.org/t/p/w500/hr0L2aueqlP2BYUblTTjmtn0hw4.jpg', 'The Dark Knight Rises', 'Christopher Nolan', 'Action', 'Christian Bale', 2012);
 
 
 `;
