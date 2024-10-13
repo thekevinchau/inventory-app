@@ -1,28 +1,7 @@
 const db = require('./pool.js')
+const {processUpdateQuery, processSearchQuery} = require('../utils/queryProcessing.js')
 
 let movie_poster = 1;
-
-/*
-How it works:
-    - takes the nonempty key-value pairs of everything in the updated_params mapping and pushes their string value into an array
-        -example: {movie_title : 'abcd', movie_genre: 'Action', movie_released: '2003'} -> ["movie_title = 'abcd'"", "movie_genre = 'Action'"", "movie_released = '2003'"]
-        - it takes every string in the updates array, and puts the SET keyword and joins it with a comma
-            -example: ["movie_title = 'abcd'"", "movie_genre = 'Action'"", "movie_released = '2003'"]
-                -> SET + "movie_title = 'abcd', movie_genre = 'Action', movie_released='2003'";
-                - overall string: "SET movie_title = 'abcd', movie_genre = 'Action', movie_released='2003'"
-
-*/
-function processUpdateQuery(updated_params){
-    const updates = [];
-    for (const [key,value] of Object.entries(updated_params)){
-        if (value !== ''){
-            updates.push(`${key} = '${value}'`);
-        }
-    }
-    return updates.length > 0 ? `SET ${updates.join(', ')}` : '';
-}
-
-
 
 async function retrieveAllMovies() {
     try {
@@ -31,6 +10,7 @@ async function retrieveAllMovies() {
     }
     catch (err) {
         console.error('Error retrieving all users from database', err);
+        res.status(500).send('Server error');
     }
 }
 
@@ -46,6 +26,7 @@ async function insertMovie(movieObject) {
     }
     catch (err) {
         console.error('Error inserting movie into the database', err)
+        res.status(500).send('Server error');
     }
 
 }
@@ -76,11 +57,29 @@ async function deleteMovie(movie_id){
     }
 }
 
+async function searchMovie(search_params){
+    const processedQuery = processSearchQuery(search_params);
+    try{
+        const {rows} = await db.query(`
+            SELECT * FROM movies
+            WHERE
+            ${processedQuery}
+            ORDER BY movie_title
+            ;
+            `)
+        console.log(rows);
+        return rows;
+    }
+    catch(err){
+        console.error('Error searching for movie', err);
+    }
+}
+
 
 async function dropAllEntries() {
     try {
         await db.query('DELETE FROM movies;')
-        const {rows} = await db.query('SELECt * from movies');
+        const {rows} = await db.query('SELECT * from movies');
         console.log(rows);
     }
     catch (err) {
@@ -88,4 +87,4 @@ async function dropAllEntries() {
     }
 }
 
-module.exports = { retrieveAllMovies, insertMovie, dropAllEntries, updateMovie, deleteMovie }
+module.exports = { retrieveAllMovies, insertMovie, dropAllEntries, updateMovie, deleteMovie, searchMovie}
